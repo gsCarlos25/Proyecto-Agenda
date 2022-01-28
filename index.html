@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="assets/styles/styles.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <img class="cabecera" src="assets/imgs/imagen-fondo.jpg"> -->
+    <div class="filtro-imagen"></div>
+    <div id="app">
+        <div class="padre">
+            <input type="text" id="buscador" @keyup="buscarTarea" placeholder="Buscar..." v-model="textoBuscar">
+            <input type="text" id="nombreTarea" v-model="nombreTarea" @keyup.enter="insertarTarea" placeholder="Nombre tarea...">
+            <ul v-show="tareas.length > 0">
+                <transition-group name="slide-fade">
+                    <li v-for="(tarea,index) in tareasIntroducidas" :key="index">
+                    <span @click="completarTarea(index)" :class = "{completada:tarea.completada}"> {{tarea.nombre}}  {{tarea.prioridad == 0 ? "media":tarea.prioridad == 1 ? "alta":"baja"}}&nbsp; {{tiempoTranscurrido}} minutos</span>
+                    <button @click="borrarTarea(index)">Borrar</button>
+                    <div id="prioridad">
+                        <button @click="prioridadAlta(index)">Alta</button>
+                        <button @click="prioridadMedia(index)">Media</button>
+                        <button @click="prioridadBaja(index)">Baja</button>
+                    </div>
+                </li>
+                </transition-group>
+                <div class="botones">
+                    <button class="todas" @click="mostrarTodas">Todas</button>
+                    <button class="completadas" @click="mostrarCompletadas">Completadas</button>
+                    <button class="sinCompletar" @click="mostrarNoCompletadas">Sin completar</button>
+                </div>
+            </ul>
+            <div class="informacion">
+                <p>Hay {{tareas.length}} tareas, {{tareasCompletadas}} completadas y {{tareas.length - tareasCompletadas}} sin completar</p>
+                <button v-show="tareasCompletadas > 0" v-on:click="borrarCompletada">Borrar todas las tareas completadas</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
