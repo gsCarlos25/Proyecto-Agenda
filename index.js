@@ -23,7 +23,8 @@ const App = {
                 nombre:this.nombreTarea,
                 fecha: new Date(),
                 completada:false,
-                prioridad:0
+                prioridad:0,
+                tiempo:0,
             }
             this.tareas.push(tarea)
             this.actualizarLocalStorage();
@@ -87,6 +88,12 @@ const App = {
                 return b.prioridad - a.prioridad;
             });
         },
+        tiempoTranscurrido(index){
+            let actual = new Date()
+            this.tareas[index].tiempo = Math.floor((actual - new Date(this.tareas[index].fecha))/60000)
+            this.actualizarLocalStorage;
+            return this.tareas[index].tiempo
+        }
     },
     computed:{
         tareasCompletadas(){
@@ -97,10 +104,6 @@ const App = {
                 }
             }
             return completadas;
-        },
-        tiempoTranscurrido(){
-            let actual = new Date()
-            return Math.floor((actual - new Date(tarea.fecha))/60000)
         }
     }
 }

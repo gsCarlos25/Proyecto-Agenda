@@ -7,10 +7,10 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script src="index.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tareas Agenda Carlos</title>
 </head>
 <body>
-    <!-- <img class="cabecera" src="assets/imgs/imagen-fondo.jpg"> -->
+    <!-- <img class="imagen" src="assets/imgs/imagen-fondo.jpg"> -->
     <div class="filtro-imagen"></div>
     <div id="app">
         <div class="padre">
@@ -19,7 +19,7 @@
             <ul v-show="tareas.length > 0">
                 <transition-group name="slide-fade">
                     <li v-for="(tarea,index) in tareasIntroducidas" :key="index">
-                    <span @click="completarTarea(index)" :class = "{completada:tarea.completada}"> {{tarea.nombre}}  {{tarea.prioridad == 0 ? "media":tarea.prioridad == 1 ? "alta":"baja"}}&nbsp; {{tiempoTranscurrido}} minutos</span>
+                    <span @click="completarTarea(index)" :class = "{completada:tarea.completada}"> {{tarea.nombre}}  {{tarea.prioridad == 0 ? "media":tarea.prioridad == 1 ? "alta":"baja"}}&nbsp; {{tiempoTranscurrido(index)}} minutos</span>
                     <button @click="borrarTarea(index)">Borrar</button>
                     <div id="prioridad">
                         <button @click="prioridadAlta(index)">Alta</button>
